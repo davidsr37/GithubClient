@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserSearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate {
+class UserSearchVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UINavigationControllerDelegate {
   
   
   @IBOutlet weak var collectionView: UICollectionView!
@@ -16,62 +16,101 @@ class UserSearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDel
   @IBOutlet weak var searchBar: UISearchBar!
   
   var users = [User]()
+  
+  let netCon = NetCon.sharedNetworkController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      self.collectionView.dataSource = self
-      self.searchBar.delegate = self
-      self.navigationController?.delegate = self
+      collectionView.dataSource = self
+      collectionView.delegate = self
+      
+      searchBar.delegate = self
+      
+      navigationController?.delegate = self
+    
 
         // Do any additional setup after loading the view.
     }
 
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.users.count
+    return users.count
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("USER_CELL", forIndexPath: indexPath) as UserCell
+    
+    
+    var user = users[indexPath.row]
+    
+    
+    cell.userImage.layer.cornerRadius = 8
+    cell.userImage.layer.masksToBounds = true
+    
     cell.userImage.image = nil
-    var user = self.users[indexPath.row]
+    cell.userImage.alpha = 0
+    let cellAnimationDuration = 0.3
+    
+    
+    
     if user.avatarImage == nil {
-      
-      // setup netcon-singleton method for fetchUserImage
-      NetCon.sharedNetworkController.fetchAvatarImage(user.avatarURL, completionHandler: { (image) -> (Void) in
-        cell.userImage.image = image
-        user.avatarImage = image
-        self.users[indexPath.row] = user
+     
+      netCon.fetchAvatarImage(user.avatarURL, completionHandler: { (avatarImage) -> (Void) in
+        
+        
+        user.avatarImage = avatarImage
+        self.users[indexPath.row].avatarImage = avatarImage
+        cell.userImage.image = user.avatarImage
+        
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+          
+          UIView.animateWithDuration(cellAnimationDuration, animations: { () -> Void in
+            cell.userImage.alpha = 1.0
+          })
+        })
       })
     } else {
       cell.userImage.image = user.avatarImage
+      UIView.animateWithDuration(cellAnimationDuration, animations: { () -> Void in
+        cell.userImage.alpha = 1.0
+      })
     }
     return cell
   }
   
+  //MARK: Searchbar
+  
+  
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-    searchBar.resignFirstResponder()
+    
     
     NetCon.sharedNetworkController.fetchUsersForSearchTerm(searchBar.text, callback: { (users, errorDescription) -> (Void) in
-      if errorDescription == nil {
+      if users != nil {
         self.users = users!
-        self.collectionView.reloadData()
+        
       }
+      self.collectionView.reloadData()
     })
+    searchBar.resignFirstResponder()
   }
   
   func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    if fromVC is UserSearchVC {
+    if toVC is UserDetailVC {
       return ToUserDetailTransitionAnimationController()
-    }
+    } else {
     return nil
+    }
   }
-  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "SHOW_USER_DETAIL" {
-      let destinationVC = segue.destinationViewController as UserDetailVC
-      let selectedIndexPath = self.collectionView.indexPathsForSelectedItems().first as NSIndexPath
-      destinationVC.selectedUser = self.users[selectedIndexPath.row]
+      let userDetailVC = segue.destinationViewController as UserDetailVC
+      let selectedIndexPath = collectionView.indexPathsForSelectedItems().first as NSIndexPath
+      userDetailVC.selectedUser = users[selectedIndexPath.row]
       
     }
+  }
+  
+  func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    return text.validateSearch()
   }
 }

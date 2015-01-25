@@ -15,8 +15,8 @@ class MainMenuVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-      self.netCon = appDelegate.netCon
+//      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//      self.netCon = appDelegate.netCon
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -27,6 +27,8 @@ class MainMenuVC: UITableViewController {
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
+    
+    self.navigationController?.delegate = nil
     if NetCon.sharedNetworkController.accessToken == nil {
       self.netCon.requestAccessToken()
     }

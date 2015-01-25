@@ -15,6 +15,7 @@ class SearchRepoVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
   @IBOutlet weak var searchBar: UISearchBar!
   
   var netCon : NetCon!
+  var repos = [Repository]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,9 +40,27 @@ class SearchRepoVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     println(searchBar.text)
     self.netCon.fetchRepoForSearchTerm(searchBar.text, callback: { (repositories, errorDescription) -> (Void) in
+      
+      self.repos = repositories!
+      self.tableView.reloadData()
     })
     searchBar.resignFirstResponder()
     
+  }
+  
+  func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    return text.validateSearch()
+  }
+
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "SHOW_WEB" {
+      let destinationVC = segue.destinationViewController as WebVC
+      let selectedIndexPath = self.tableView.indexPathForSelectedRow()
+      let repo = self.repos[selectedIndexPath!.row]
+      destinationVC.url = repo.url
+      
+    }
   }
   
 }

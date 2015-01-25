@@ -8,26 +8,74 @@
 
 import UIKit
 
-class UserDetailVC: UIViewController {
+class UserDetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   var selectedUser : User!
   
+  let netCon = NetCon.sharedNetworkController
+  
+  var repos = [Repository]()
+  
   @IBOutlet weak var userImage: UIImageView!
+  
+  @IBOutlet weak var userNameLabel: UILabel!
+  
+  @IBOutlet weak var userTableView: UITableView!
+  
   
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      self.userImage.image = selectedUser?.avatarImage
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+      userImage.layer.cornerRadius = 12
+      userImage.layer.masksToBounds = true
+      userImage.image = selectedUser.avatarImage
+      
+      userNameLabel.text = selectedUser.name
     
-
+        // Do any additional setup after loading the view.
+      
+      
+      
+      netCon.fetchReposForUser(selectedUser.name, callback: { (repos, error) -> (Void) in
+        if error == nil {
+          if repos != nil {
+            self.repos = repos!
+            self.userTableView.reloadData()
+          }
+        }
+      })
+   
+      //setup table for user - starting with delegate/data-source
+      userTableView.dataSource = self
+      userTableView.delegate = self
+      
+      //setup automatic dimension
+      userTableView.estimatedRowHeight = 100
+      userTableView.rowHeight = UITableViewAutomaticDimension
+    }
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return repos.count
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("REPO_CELL", forIndexPath: indexPath) as RepoCell
+  
+    let repo = repos[indexPath.row]
+    cell.repoNameLabel.text = repo.name
+    cell.authorNameLabel.text = repo.author
+  
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    let webVC = self.storyboard?.instantiateViewControllerWithIdentifier("WEB_VC") as WebVC
+    
+    webVC.url = repos[indexPath.row].url
+    
+    navigationController?.pushViewController(webVC, animated: true)
+    self.navigationController?.delegate = nil
+  }
     /*
     // MARK: - Navigation
 

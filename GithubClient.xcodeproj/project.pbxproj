@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C4659D01A748C9100DD5F48 /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4659CF1A748C9100DD5F48 /* RepoCell.swift */; };
 		9C966C4E1A705D2F00F70DC0 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C966C4D1A705D2F00F70DC0 /* UserCell.swift */; };
 		9C966C501A705EAB00F70DC0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C966C4F1A705EAB00F70DC0 /* User.swift */; };
 		9C966C541A70620300F70DC0 /* UserSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C966C531A70620300F70DC0 /* UserSearchVC.swift */; };
@@ -20,8 +21,10 @@
 		9CC7D00B1A6D9F3D00876E48 /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7D00A1A6D9F3D00876E48 /* MainMenuVC.swift */; };
 		9CC7D00D1A6DA8BD00876E48 /* SearchRepoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7D00C1A6DA8BD00876E48 /* SearchRepoVC.swift */; };
 		9CC7D00F1A6DA95100876E48 /* NetCon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7D00E1A6DA95100876E48 /* NetCon.swift */; };
-		9CC7D0111A6DB0C100876E48 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7D0101A6DB0C100876E48 /* Repo.swift */; };
+		9CC7D0111A6DB0C100876E48 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7D0101A6DB0C100876E48 /* Repository.swift */; };
+		9CC8AA071A71BB060065F315 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC8AA061A71BB060065F315 /* Extensions.swift */; };
 		9CCAF2C71A7170C800A4F9B4 /* MyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF2C61A7170C800A4F9B4 /* MyAlertView.xib */; };
+		9CD6DFC11A72EB6D00651F24 /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6DFC01A72EB6D00651F24 /* WebVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9C4659CF1A748C9100DD5F48 /* RepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
 		9C966C4D1A705D2F00F70DC0 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9C966C4F1A705EAB00F70DC0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9C966C531A70620300F70DC0 /* UserSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchVC.swift; path = ../UserSearchVC.swift; sourceTree = "<group>"; };
@@ -52,8 +56,10 @@
 		9CC7D00A1A6D9F3D00876E48 /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
 		9CC7D00C1A6DA8BD00876E48 /* SearchRepoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRepoVC.swift; sourceTree = "<group>"; };
 		9CC7D00E1A6DA95100876E48 /* NetCon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetCon.swift; sourceTree = "<group>"; };
-		9CC7D0101A6DB0C100876E48 /* Repo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
+		9CC7D0101A6DB0C100876E48 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		9CC8AA061A71BB060065F315 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9CCAF2C61A7170C800A4F9B4 /* MyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyAlertView.xib; path = ../MyAlertView.xib; sourceTree = "<group>"; };
+		9CD6DFC01A72EB6D00651F24 /* WebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,9 +137,10 @@
 		9CC7D0121A6DB16400876E48 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9C966C4F1A705EAB00F70DC0 /* User.swift */,
 				9CC7CFE61A6D72F900876E48 /* AppDelegate.swift */,
-				9CC7D0101A6DB0C100876E48 /* Repo.swift */,
+				9C966C4F1A705EAB00F70DC0 /* User.swift */,
+				9CC7D0101A6DB0C100876E48 /* Repository.swift */,
+				9CC8AA061A71BB060065F315 /* Extensions.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 				9C966C531A70620300F70DC0 /* UserSearchVC.swift */,
 				9CC76CBA1A70B968001EA474 /* ToUserDetailTransitionAnimationController.swift */,
 				9CC76CB81A70B7FD001EA474 /* UserDetailVC.swift */,
+				9CD6DFC01A72EB6D00651F24 /* WebVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -156,6 +164,7 @@
 			children = (
 				9CC7CFEA1A6D72F900876E48 /* Main.storyboard */,
 				9CCAF2C61A7170C800A4F9B4 /* MyAlertView.xib */,
+				9C4659CF1A748C9100DD5F48 /* RepoCell.swift */,
 				9C966C4D1A705D2F00F70DC0 /* UserCell.swift */,
 				9CC7CFEF1A6D72F900876E48 /* LaunchScreen.xib */,
 				9CC7CFED1A6D72F900876E48 /* Images.xcassets */,
@@ -269,10 +278,13 @@
 				9C966C4E1A705D2F00F70DC0 /* UserCell.swift in Sources */,
 				9C966C541A70620300F70DC0 /* UserSearchVC.swift in Sources */,
 				9CC76CB91A70B7FD001EA474 /* UserDetailVC.swift in Sources */,
-				9CC7D0111A6DB0C100876E48 /* Repo.swift in Sources */,
+				9C4659D01A748C9100DD5F48 /* RepoCell.swift in Sources */,
+				9CC7D0111A6DB0C100876E48 /* Repository.swift in Sources */,
 				9CC76CBB1A70B969001EA474 /* ToUserDetailTransitionAnimationController.swift in Sources */,
 				9CC7D00D1A6DA8BD00876E48 /* SearchRepoVC.swift in Sources */,
 				9CC7D00B1A6D9F3D00876E48 /* MainMenuVC.swift in Sources */,
+				9CD6DFC11A72EB6D00651F24 /* WebVC.swift in Sources */,
+				9CC8AA071A71BB060065F315 /* Extensions.swift in Sources */,
 				9C966C501A705EAB00F70DC0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
