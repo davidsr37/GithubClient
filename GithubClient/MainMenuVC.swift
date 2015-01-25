@@ -10,7 +10,7 @@ import UIKit
 
 class MainMenuVC: UITableViewController {
 
-  var netCon : NetCon!
+  var netCon = NetCon.sharedNetworkController
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +26,18 @@ class MainMenuVC: UITableViewController {
     }
 
   override func viewDidAppear(animated: Bool) {
+    
     super.viewDidAppear(animated)
     
     self.navigationController?.delegate = nil
-    if NetCon.sharedNetworkController.accessToken == nil {
+    
+    if netCon.accessToken == nil {
       self.netCon.requestAccessToken()
+    } else {
+      println("token error")
     }
+    
+    
   }
   
     override func didReceiveMemoryWarning() {

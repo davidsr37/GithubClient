@@ -11,6 +11,7 @@
 		9C966C4E1A705D2F00F70DC0 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C966C4D1A705D2F00F70DC0 /* UserCell.swift */; };
 		9C966C501A705EAB00F70DC0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C966C4F1A705EAB00F70DC0 /* User.swift */; };
 		9C966C541A70620300F70DC0 /* UserSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C966C531A70620300F70DC0 /* UserSearchVC.swift */; };
+		9CADF2FD1A74C5A4004EE8AA /* RepoCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CADF2FC1A74C5A4004EE8AA /* RepoCellNib.xib */; };
 		9CC76CB91A70B7FD001EA474 /* UserDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC76CB81A70B7FD001EA474 /* UserDetailVC.swift */; };
 		9CC76CBB1A70B969001EA474 /* ToUserDetailTransitionAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC76CBA1A70B968001EA474 /* ToUserDetailTransitionAnimationController.swift */; };
 		9CC7CFE71A6D72F900876E48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7CFE61A6D72F900876E48 /* AppDelegate.swift */; };
@@ -23,7 +24,6 @@
 		9CC7D00F1A6DA95100876E48 /* NetCon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7D00E1A6DA95100876E48 /* NetCon.swift */; };
 		9CC7D0111A6DB0C100876E48 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC7D0101A6DB0C100876E48 /* Repository.swift */; };
 		9CC8AA071A71BB060065F315 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC8AA061A71BB060065F315 /* Extensions.swift */; };
-		9CCAF2C71A7170C800A4F9B4 /* MyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CCAF2C61A7170C800A4F9B4 /* MyAlertView.xib */; };
 		9CD6DFC11A72EB6D00651F24 /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6DFC01A72EB6D00651F24 /* WebVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +42,7 @@
 		9C966C4D1A705D2F00F70DC0 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9C966C4F1A705EAB00F70DC0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9C966C531A70620300F70DC0 /* UserSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchVC.swift; path = ../UserSearchVC.swift; sourceTree = "<group>"; };
+		9CADF2FC1A74C5A4004EE8AA /* RepoCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RepoCellNib.xib; path = ../RepoCellNib.xib; sourceTree = "<group>"; };
 		9CC76CB81A70B7FD001EA474 /* UserDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailVC.swift; sourceTree = "<group>"; };
 		9CC76CBA1A70B968001EA474 /* ToUserDetailTransitionAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToUserDetailTransitionAnimationController.swift; sourceTree = "<group>"; };
 		9CC7CFE11A6D72F800876E48 /* GithubClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,7 +59,6 @@
 		9CC7D00E1A6DA95100876E48 /* NetCon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetCon.swift; sourceTree = "<group>"; };
 		9CC7D0101A6DB0C100876E48 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		9CC8AA061A71BB060065F315 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		9CCAF2C61A7170C800A4F9B4 /* MyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyAlertView.xib; path = ../MyAlertView.xib; sourceTree = "<group>"; };
 		9CD6DFC01A72EB6D00651F24 /* WebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,8 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				9CC7CFEA1A6D72F900876E48 /* Main.storyboard */,
-				9CCAF2C61A7170C800A4F9B4 /* MyAlertView.xib */,
 				9C4659CF1A748C9100DD5F48 /* RepoCell.swift */,
+				9CADF2FC1A74C5A4004EE8AA /* RepoCellNib.xib */,
 				9C966C4D1A705D2F00F70DC0 /* UserCell.swift */,
 				9CC7CFEF1A6D72F900876E48 /* LaunchScreen.xib */,
 				9CC7CFED1A6D72F900876E48 /* Images.xcassets */,
@@ -253,7 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CC7CFEC1A6D72F900876E48 /* Main.storyboard in Resources */,
-				9CCAF2C71A7170C800A4F9B4 /* MyAlertView.xib in Resources */,
+				9CADF2FD1A74C5A4004EE8AA /* RepoCellNib.xib in Resources */,
 				9CC7CFF11A6D72F900876E48 /* LaunchScreen.xib in Resources */,
 				9CC7CFEE1A6D72F900876E48 /* Images.xcassets in Resources */,
 			);

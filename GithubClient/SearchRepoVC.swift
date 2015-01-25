@@ -14,7 +14,9 @@ class SearchRepoVC: UIViewController, UITableViewDataSource, UISearchBarDelegate
   
   @IBOutlet weak var searchBar: UISearchBar!
   
-  var netCon : NetCon!
+  
+  
+  var netCon = NetCon.sharedNetworkController
   var repos = [Repository]()
   
   override func viewDidLoad() {

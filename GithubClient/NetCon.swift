@@ -20,11 +20,11 @@ class NetCon {
   }
   
   //global var of urlSession - we want accessible from all classes
-  let clientSecret = "9afc211b878b387d26a5637b73b04c8eaa4040b1"
-  let clientID = "952c7caaf6e1fab8e68e"
+  let clientSecret = "f25d12fdcaa80cdb7058691fb523852b4727e99f"
+  let clientID = "db94e269b025aa7eca3a"
   
   var urlSession : NSURLSession
-  let accessTokenUserDefaults = "accessToken"
+  let accessTokenUserDefaults = "AccessToken"
   var accessToken : String?
   
   let imageQueue = NSOperationQueue()
@@ -52,31 +52,32 @@ class NetCon {
       let query = url.query
     
     
-//      let oauthURL = "https://github.com/login/oath/access_token\(query!)&client_id=\(self.clientID)&client_secret=\(self.clientSecret)"
-//      let postRequest = NSMutableURLRequest(URL: NSURL(string: oauthURL)!)
-//      postRequest.HTTPMethod = "POST"
+     let requestURL = "https://github.com/login/oath/access_token\(query!)&client_id=\(self.clientID)&client_secret=\(self.clientSecret)"
+     let postRequest = NSMutableURLRequest(URL: NSURL(string: requestURL)!)
+     postRequest.HTTPMethod = "POST"
+    
 //    this was another (much shorter) method learned in class, but will not work if the authentication comes in the body of the HTTP request, we can do it in the following way in that case:
-    
-    //our data and format, but added to the body-string
-    let bodyString = "\(query!)&client_id=\(self.clientID)&client_secret=\(self.clientSecret)"
-    
-    //set property necessary for body-data format
-    let bodyData = bodyString.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
-    //another necessary property of this format
-    let length = bodyData!.length
-    
-    //set-up post request url and then you can set more required properties for the body format
-    let postRequest = NSMutableURLRequest(URL: NSURL(string: "https://github.com/login/oauth/access_token")!)
-    //this next one is universal: our method call to the API server
-    postRequest.HTTPMethod = "POST"
-    
-    //and this is how we do it
-    postRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
-    postRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-    //and we do it
-    postRequest.HTTPBody = bodyData
-    //yes, that was a lot to do for body format
-    
+//    
+//    //our data and format, but added to the body-string
+//    let bodyString = "\(query!)&client_id=\(self.clientID)&client_secret=\(self.clientSecret)"
+//    
+//    //set property necessary for body-data format
+//    let bodyData = bodyString.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+//    //another necessary property of this format
+//    let length = bodyData!.length
+//    
+//    //set-up post request url and then you can set more required properties for the body format
+//    let postRequest = NSMutableURLRequest(URL: NSURL(string: "https://github.com/login/oauth/access_token")!)
+//    //this next one is universal: our method call to the API server
+//    postRequest.HTTPMethod = "POST"
+//    
+//    //and this is how we do it
+//    postRequest.setValue("\(length)", forHTTPHeaderField: "Content-Length")
+//    postRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//    //and we do it
+//    postRequest.HTTPBody = bodyData
+//    //yes, that was a lot to do for body format
+//    
     //now, to the session - request
     
     
@@ -128,17 +129,19 @@ class NetCon {
                 
           case 200...299:
             println(httpResp)
-            let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as [String : AnyObject]
-            println(jsonDictionary)
-            var repos = [Repository]()
-            if let itemsArray = jsonDictionary["items"] as? [[String : AnyObject]] {
-              for object in itemsArray {
-                let repo = Repository(jsonDictionary: object)
+            if let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [String : AnyObject] {
+      //      println(jsonDictionary)
+            
+              if let itemsArray = jsonDictionary["items"] as? [[String : AnyObject]] {
+              var repos = [Repository]()
+              for item in itemsArray {
+                let repo = Repository(jsonDictionary: item)
                 repos.append(repo)
+                }
+              NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                callback(repos, nil)
+                })
               }
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-              callback(repos, nil)
-              })
             }
           default:
             println("default")
@@ -160,6 +163,7 @@ class NetCon {
     let request = NSMutableURLRequest(URL: url!)
     //following line is how github knows who is making the request
     request.setValue("token \(self.accessToken!)", forHTTPHeaderField: "Authorization")
+    
     
     let dataTask = self.urlSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
       if error == nil {

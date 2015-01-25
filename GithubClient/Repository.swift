@@ -16,7 +16,7 @@ struct Repository {
   
   init(jsonDictionary : [String : AnyObject]) {
     self.name = jsonDictionary["name"] as String
-    self.author = "David"
+    self.author = jsonDictionary["login"] as String 
     self.url = jsonDictionary["html_url"] as String
   }
   

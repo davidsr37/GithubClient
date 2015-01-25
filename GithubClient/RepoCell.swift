@@ -18,6 +18,25 @@ class RepoCell: UITableViewCell {
   
   @IBOutlet weak var authorNameLabel: UILabel!
   
+  let repo : Repository!
+  
+  
+  //xib file version of viewDidLoad
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    self.repoNameLabel.text = repo?.name
+    self.authorNameLabel.text = repo?.author
+    
+    // Initialization code would go here
+  }
+  
+  override func setSelected(selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+    
+    // Configure the view for the selected state
+  }
+
   
   
 }

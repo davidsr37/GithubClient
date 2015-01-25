@@ -88,6 +88,8 @@ class UserSearchVC: UIViewController, UICollectionViewDataSource, UICollectionVi
       if users != nil {
         self.users = users!
         
+      } else {
+        println("fetchUserForSearchTerm error")
       }
       self.collectionView.reloadData()
     })
